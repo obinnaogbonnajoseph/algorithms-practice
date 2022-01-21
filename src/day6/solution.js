@@ -1,4 +1,4 @@
-const readFile = require('../readfile');
+const { readFile } = require('../exports');
 
 const solve = async () => {
     const file = './day6/prob.txt';
