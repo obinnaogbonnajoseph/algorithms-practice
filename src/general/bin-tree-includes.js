@@ -1,5 +1,5 @@
 const { solveBinTree: solve } = require('../exports');
-const getNode = require('./bin-tree-data')
+const { getNode } = require('./data')
 
 // recursive
 const treeIncludesRecursive = (root, val) => {

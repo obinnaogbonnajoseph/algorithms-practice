@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
-const getNode = require('./general/bin-tree-data')
+const { getNode } = require('./general/data')
 
 const readFile = async (filePath, splitter = '\n') => {
     const out = await fs.readFile(path.join(__dirname, filePath), { encoding: 'utf8' })
