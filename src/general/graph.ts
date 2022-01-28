@@ -3,9 +3,11 @@ import { Graph, graphData } from './data';
 const depthFirstTraverse = (graph: Graph, source: string) => {
     const stack = [source];
     while (stack.length) {
-        const cur = stack.pop();
-        console.log(cur);
-        stack.push(...graph[cur])
+        const cur = stack!.pop();
+        if (cur) {
+            console.log(cur);
+            stack.push(...graph[cur])
+        }
     }
 }
 
