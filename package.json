@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "Obinna Ogbonna <obinnaogbonnajoseph@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^17.0.13"
+  }
 }

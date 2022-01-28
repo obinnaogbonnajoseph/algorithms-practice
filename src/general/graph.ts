@@ -1,6 +1,6 @@
-const { graphData } = require('./data')
+import { Graph, graphData } from './data';
 
-const depthFirstTraverse = (graph, source) => {
+const depthFirstTraverse = (graph: Graph, source: string) => {
     const stack = [source];
     while (stack.length) {
         const cur = stack.pop();

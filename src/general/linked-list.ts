@@ -1,6 +1,6 @@
-const { getLinkedNode, zipperData, LinkedNode, mergedListsData } = require('./data')
+import { getSinglyLinkedListRootNode as getLinkedNode, zipperSinglyLinkedListData as zipperData, SinglyLinkedListNode as LinkedNode, mergedSinglyLinkedListData as mergedListsData, SinglyLinkedListNode } from './data';
 
-const getValues = (node) => {
+const getValues = (node: SinglyLinkedListNode) => {
     const vals = [];
     let cur = node;
     while (cur) {
@@ -10,7 +10,7 @@ const getValues = (node) => {
     return `Linked List values: ${vals}`;
 }
 
-const getSum = (node) => {
+const getSum = (node: SinglyLinkedListNode) => {
     let sum = 0;
     let cur = node;
     while (cur) {
@@ -20,7 +20,7 @@ const getSum = (node) => {
     return `Sum: ${sum}`
 }
 
-const find = (node, val) => {
+const find = (node: SinglyLinkedListNode, val: number) => {
     let cur = node;
     while (cur) {
         if (cur.val === val) return `Has Node(${val})? true`
@@ -29,7 +29,7 @@ const find = (node, val) => {
     return `Has Node(${val})? false`;
 }
 
-const getValue = (node, index) => {
+const getValue = (node: SinglyLinkedListNode, index: number) => {
     let cur = node, ind = 0;
     while (cur) {
         if (ind === index) return `Node: {val: ${cur.val}}`
@@ -43,8 +43,8 @@ const getValue = (node, index) => {
 // prev    cur  next
 // null <-- a <-- b <-- c <-- d
 
-const reverseListItr = (node) => {
-    let previous = null;
+const reverseListItr = (node: SinglyLinkedListNode) => {
+    let previous = null as unknown as SinglyLinkedListNode;
     let current = node;
     while (current) {
         const next = current.next;
@@ -55,7 +55,7 @@ const reverseListItr = (node) => {
     return getValues(previous);
 }
 
-const reverseListRecursive = (node, prev = null) => {
+const reverseListRecursive = (node: SinglyLinkedListNode, prev = null as unknown as SinglyLinkedListNode): string => {
     if (!node) return getValues(prev)
     const cur = node;
     const next = cur.next;
@@ -64,7 +64,7 @@ const reverseListRecursive = (node, prev = null) => {
     return reverseListRecursive(next, prev)
 }
 
-const zipperList = (head1, head2) => {
+const zipperList = (head1: SinglyLinkedListNode, head2: SinglyLinkedListNode) => {
     let index = 0, cur = head2, cur1 = head1, cur2 = head2.next
     while (cur1 && cur2) {
         if (index % 2 === 0) {
@@ -82,8 +82,8 @@ const zipperList = (head1, head2) => {
     return getValues(head2);
 }
 
-const mergeSortedLists = (head1, head2) => {
-    let cur1 = head1, cur2 = head2, cur = null, head = null;
+const mergeSortedLists = (head1: SinglyLinkedListNode, head2: SinglyLinkedListNode) => {
+    let cur1 = head1, cur2 = head2, cur = null as unknown as SinglyLinkedListNode, head = null as unknown as SinglyLinkedListNode;
     while (cur1 && cur2) {
         if (cur1.val < cur2.val) {
             if (cur) {
@@ -110,7 +110,7 @@ const mergeSortedLists = (head1, head2) => {
     return getValues(head)
 }
 
-const mergePoint = (headA, headB) => {
+const mergePoint = (headA: SinglyLinkedListNode, headB: SinglyLinkedListNode) => {
     let curA = headA, curB = headB;
     while (curA !== curB) {
         if (curA.next === null) curA = headB
