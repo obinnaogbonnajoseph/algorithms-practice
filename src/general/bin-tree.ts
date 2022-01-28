@@ -1,5 +1,5 @@
 const { solveBinTree: solve } = require('../exports');
-import { BinTreeNode, getBinTreeRootNode as getNode } from './data';
+import { BinTreeNode, getBinTreeRootNode as getNode, leftViewData } from './data';
 
 // recursive
 const treeIncludesRecursive = (root: BinTreeNode, val: number): boolean => {
@@ -124,3 +124,109 @@ const treeSumBFS = (root: BinTreeNode) => {
 }
 
 console.log(solve(treeSumDFS, treeSumBFS, treeSumRecursive))
+
+
+
+const maxPathSumRecursive = (root: BinTreeNode): number => {
+    if (root === null) return 0;
+    let next = null as unknown as BinTreeNode;
+    const leftVal = root.left?.val ?? -Infinity;
+    const rightVal = root.right?.val ?? -Infinity;
+    next = leftVal > rightVal ? root.left : root.right;
+    return root!.val + maxPathSumRecursive(next);
+}
+
+const maxPathSumDFS = (root: BinTreeNode) => {
+    const stack = [root];
+    let sum = 0;
+    while (stack.length) {
+        const cur = stack.pop();
+        if (cur) {
+            sum += cur.val
+            const left = cur.left?.val ?? -Infinity;
+            const right = cur.right?.val ?? -Infinity;
+            const next = left > right ? cur.left : cur.right;
+            stack.push(next);
+        }
+    }
+    return sum;
+}
+
+const maxPathSumBFS = (root: BinTreeNode) => {
+    const queue = [root];
+    let sum = 0;
+    while (queue.length) {
+        const cur = queue.shift();
+        if (cur) {
+            sum += cur.val
+            const left = cur.left?.val ?? -Infinity;
+            const right = cur.right?.val ?? -Infinity;
+            const next = left > right ? cur.left : cur.right;
+            queue.push(next);
+        }
+    }
+    return sum;
+}
+
+console.log(solve(maxPathSumDFS, maxPathSumBFS, maxPathSumRecursive))
+
+//          3
+//         / \
+//        4   5
+//           / \
+//          6   7
+//         / \   \
+//        8   9   10
+// out: 3, 4, 6, 8  
+const leftView = (node: BinTreeNode): string => {
+    let maxLevel = 0;
+    const result: number[] = [];
+    const leftViewUtil = (node: BinTreeNode, level: number) => {
+        if (!node) return;
+        if (maxLevel < level) {
+            result.push(node.val)
+            maxLevel = level;
+        }
+        leftViewUtil(node.left, level + 1);
+        leftViewUtil(node.right, level + 1);
+    }
+    leftViewUtil(node, 1);
+    return `Left view: ${result}`
+}
+console.log(leftView(leftViewData()))
+
+
+//          3
+//         / \
+//        4   5
+//           / \
+//          6   7
+//         / \   \
+//        8   9   10
+// out: 4, 3, 5, 7, 10
+const outlineView = (node: BinTreeNode): string => {
+    let maxLevel = 0;
+    const result: number[] = [];
+    const leftView = (node: BinTreeNode, level: number) => {
+        if (!node) return;
+        if (maxLevel < level) {
+            result.push(node.val)
+            maxLevel = level;
+        }
+        leftView(node.left, level + 1);
+    }
+    const rightView = (node: BinTreeNode, level: number) => {
+        if (!node) return;
+        if (maxLevel < level) {
+            result.push(node.val)
+            maxLevel = level;
+        }
+        rightView(node.right, level + 1);
+    }
+    leftView(node, 1);
+    result.reverse();
+    maxLevel = 1;
+    rightView(node, 1);
+    return `Outline View: ${result}`;
+}
+console.log(outlineView(leftViewData()));

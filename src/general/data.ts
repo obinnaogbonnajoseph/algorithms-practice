@@ -39,6 +39,25 @@ export const getBinTreeRootNode = () => {
     return root;
 }
 
+//          3
+//         / \
+//        4   5
+//           / \
+//          6   7
+//         / \   \
+//        8   9   10
+export const leftViewData = () => {
+    const root = new BinTreeNode(3);
+    root.left = new BinTreeNode(4);
+    root.right = new BinTreeNode(5);
+    root.right.left = new BinTreeNode(6);
+    root.right.right = new BinTreeNode(7);
+    root.right.left.left = new BinTreeNode(8);
+    root.right.left.right = new BinTreeNode(9);
+    root.right.right.right = new BinTreeNode(10);
+    return root;
+}
+
 export const getSinglyLinkedListRootNode = () => {
     const root = new SinglyLinkedListNode(3);
     const scnd = new SinglyLinkedListNode(11);
