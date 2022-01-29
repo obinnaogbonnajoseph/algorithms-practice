@@ -214,6 +214,7 @@ const outlineView = (node: BinTreeNode): string => {
             maxLevel = level;
         }
         leftView(node.left, level + 1);
+        leftView(node.right, level + 1);
     }
     const rightView = (node: BinTreeNode, level: number) => {
         if (!node) return;
@@ -222,6 +223,7 @@ const outlineView = (node: BinTreeNode): string => {
             maxLevel = level;
         }
         rightView(node.right, level + 1);
+        rightView(node.left, level + 1);
     }
     leftView(node, 1);
     result.reverse();
