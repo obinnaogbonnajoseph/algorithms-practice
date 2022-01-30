@@ -125,3 +125,21 @@ export const graphData: Graph = {
     e: [],
     f: []
 }
+
+
+//          5
+//         / \
+//        /   \
+//       3     8
+//      / \   / \
+//     2   4 6   15
+export const bstData = (): BinTreeNode => {
+    const root = new BinTreeNode(5);
+    root.left = new BinTreeNode(3);
+    root.right = new BinTreeNode(8);
+    root.left.left = new BinTreeNode(2);
+    root.left.right = new BinTreeNode(4)
+    root.right.left = new BinTreeNode(6);
+    root.right.right = new BinTreeNode(15)
+    return root;
+}
