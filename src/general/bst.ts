@@ -53,7 +53,35 @@ const add = (node: BinTreeNode, val: number) => {
             }
         }
     }
-    return inorderTraversal(node);
+    return `Node after add: ${inorderTraversal(node)}`;
+}
+
+const deleteNode = (node: BinTreeNode, val: number) => {
+    const delNode = (node: BinTreeNode, val: number): BinTreeNode => {
+        if (node.val < val) node.right = delNode(node.right, val);
+        else if (node.val > val) node.left = delNode(node.left, val);
+        else {
+            // leaf node or one branch node
+            if (!node.left) return node.right
+            if (!node.right) return node.left
+            // replace with inorder successor
+            node.val = minVal(node.right)
+            node.right = delNode(node.right, node.val)
+        }
+        return node;
+    }
+
+    const minVal = (node: BinTreeNode): number => {
+        let min = node.val;
+        while (node.left) {
+            min = node.left.val;
+            node = node.left
+        }
+        return min
+    }
+
+    delNode(node, val);
+    return `Node after del: ${inorderTraversal(node)}`
 }
 
 
@@ -63,3 +91,4 @@ console.log(inorderTraversal(bstData()));
 console.log(preorderTraversal(bstData()));
 console.log(postorderTraversal(bstData()));
 console.log(add(bstData(), 7))
+console.log(deleteNode(bstData(), 8))
