@@ -84,6 +84,17 @@ const deleteNode = (node: BinTreeNode, val: number) => {
     return `Node after del: ${inorderTraversal(node)}`
 }
 
+const lca = (node: BinTreeNode, v1: number, v2: number): string => {
+
+    const lcaImpl = (node: BinTreeNode, v1: number, v2: number): BinTreeNode | null => {
+        if (!node) return null;
+        if (node.val < v1 && node.val < v2) return lcaImpl(node.right, v1, v2);
+        if (node.val > v1 && node.val > v2) return lcaImpl(node.left, v1, v2);
+        return node;
+    }
+    return `Lowest Common Ancestor of ${v1} & ${v2}: ${lcaImpl(node, v1, v2)?.val ?? 'None!'}`;
+}
+
 
 
 
@@ -92,3 +103,4 @@ console.log(preorderTraversal(bstData()));
 console.log(postorderTraversal(bstData()));
 console.log(add(bstData(), 7))
 console.log(deleteNode(bstData(), 8))
+console.log(lca(bstData(), 4, 6));
