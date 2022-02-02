@@ -7,6 +7,18 @@ export class BinTreeNode {
     }
 }
 
+export class TopViewBinNode extends BinTreeNode {
+
+    left: TopViewBinNode = null as unknown as TopViewBinNode;
+    right: TopViewBinNode = null as unknown as TopViewBinNode;
+    hd: number;
+
+    constructor(val: number) {
+        super(val);
+        this.hd = 0
+    }
+}
+
 export class SinglyLinkedListNode {
     next: SinglyLinkedListNode = null as unknown as SinglyLinkedListNode;
     val: number;
@@ -55,6 +67,18 @@ export const leftViewData = () => {
     root.right.left.left = new BinTreeNode(8);
     root.right.left.right = new BinTreeNode(9);
     root.right.right.right = new BinTreeNode(10);
+    return root;
+}
+
+export const topViewData = () => {
+    const root = new TopViewBinNode(3);
+    root.left = new TopViewBinNode(4);
+    root.right = new TopViewBinNode(5);
+    root.right.left = new TopViewBinNode(6);
+    root.right.right = new TopViewBinNode(7);
+    root.right.left.left = new TopViewBinNode(8);
+    root.right.left.right = new TopViewBinNode(9);
+    root.right.right.right = new TopViewBinNode(10);
     return root;
 }
 

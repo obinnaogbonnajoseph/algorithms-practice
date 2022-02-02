@@ -1,5 +1,5 @@
 const { solveBinTree: solve } = require('../exports');
-import { BinTreeNode, getBinTreeRootNode as getNode, leftViewData } from './data';
+import { BinTreeNode, getBinTreeRootNode as getNode, leftViewData, TopViewBinNode, topViewData } from './data';
 
 // recursive
 const treeIncludesRecursive = (root: BinTreeNode, val: number): boolean => {
@@ -232,3 +232,30 @@ const outlineView = (node: BinTreeNode): string => {
     return `Outline View: ${result}`;
 }
 console.log(outlineView(leftViewData()));
+
+
+const topView = (node: TopViewBinNode): string => {
+    // using dfs
+    const queue: TopViewBinNode[] = [node];
+    let cur: TopViewBinNode = null as unknown as TopViewBinNode, map = new Map();
+    while (queue.length) {
+        cur = queue.shift() as unknown as TopViewBinNode;
+        if (cur) {
+            if (!map.has(cur.hd)) map.set(cur.hd, cur.val);
+            if (cur.left) {
+                cur.left.hd = cur.hd - 1;
+                queue.push(cur.left);
+            }
+            if (cur.right) {
+                cur.right.hd = cur.hd + 1;
+                queue.push(cur.right);
+            }
+        }
+    }
+    const result = [];
+    for (let key of Array.from(map.keys()).sort()) {
+        result.push(map.get(key));
+    }
+    return `Top View: ${result}`
+}
+console.log(topView(topViewData()));
